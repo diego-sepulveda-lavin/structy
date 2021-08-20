@@ -18,22 +18,28 @@
 const uncompress = (str: string): string => {
   let p1 = 0;
   let p2 = p1 + 1;
-  let output = "";
+  let output = [];
 
   while (p2 <= str.length - 1) {
-    if (!isNaN(Number(str[p2]))) {
-      p2++;
-    } else {
-      const charMultiplier = Number(str.slice(p1, p2));
-      output += str[p2]?.repeat(charMultiplier);
+    const currRightChar = str[p2];
+    if (isNaN(Number(currRightChar))) {
+      const charRepetition = Number(str.slice(p1, p2));
+      for (let i = 1; i <= charRepetition; i++) {
+        output.push(str[p2]);
+      }
       p1 = p2 + 1;
       p2 = p1 + 1;
+    } else {
+      p2++;
     }
   }
-  return output;
+  return output.join("");
 };
 
-console.log(uncompress("2c3a1t"));
-console.log(uncompress("4s2b"));
-console.log(uncompress("3n12e2z"));
-console.log(uncompress("10y"));
+// n = # of groups
+// m = max number for any group
+// O(n*m) Time | O(n*m) Space
+console.log(uncompress("2c3a1t")); //ccaaat
+console.log(uncompress("4s2b")); // ssssbb
+console.log(uncompress("3n12e2z")); // nnneeeeeeeeeeeezz
+console.log(uncompress("10y")); // yyyyyyyyyy
