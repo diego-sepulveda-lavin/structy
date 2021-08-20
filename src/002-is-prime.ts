@@ -27,7 +27,7 @@ const isPrime = (n: number): boolean => {
 
 const isPrime2 = (n: number): boolean => {
   if (n === 1) return false;
-  for (let i = 2; i <= Math.sqrt(n); i++) {
+  for (let i = 2; i <= Math.sqrt(n); i++) { // Iterate up to square root of n improves algorithm
     if (n % i === 0) return false;
   }
   return true;
