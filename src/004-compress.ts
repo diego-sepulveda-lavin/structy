@@ -20,21 +20,20 @@ const compress = (s: string) => {
   let p1 = 0;
   let p2 = 0;
   let output: string[] = [];
-  let charCounter = 0;
 
   while (p2 <= s.length) {
     if (s[p1] === s[p2]) {
       p2++;
-      charCounter++;
     } else {
-      charCounter === 1 ? output.push(s[p1]!) : output.push(charCounter + s[p1]!);
-      charCounter = 0;
+      let count = p2 - p1; // rest of p2 - p1 indexes represents the number of chars
+      count === 1 ? output.push(s[p1]!) : output.push(count + s[p1]!);
       p1 = p2;
     }
   }
   return output.join("");
 };
 
+// O(n) Time | O(n) Space where n is string length
 console.log(compress("hello")); // 'he2lo
 console.log(compress("ccaaatsss")); // -> '2c3at3s'
 console.log(compress("nnneeeeeeeeeeeezz")); // -> '3n12e2z'
