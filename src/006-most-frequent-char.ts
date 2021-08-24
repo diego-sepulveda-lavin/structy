@@ -12,21 +12,27 @@
 */
 
 const mostFrequentChar = (s: string): string => {
-  const charMap: { [key: string]: number } = {};
-  let currMostFrequent: [string, number] = ["", 0];
+  if (s.length > 0) {
+    const charMap: { [key: string]: number } = {};
+    let currMostFrequent: [string, number] = ["", 0];
 
-  for (const char of s) {
-    char in charMap ? (charMap[char] += 1) : (charMap[char] = 1);
-  }
-
-  for (const key in charMap) {
-    if (charMap[key] > currMostFrequent[1]) {
-      currMostFrequent[0] = key;
-      currMostFrequent[1] = charMap[key];
+    for (const char of s) {
+      char in charMap ? (charMap[char] += 1) : (charMap[char] = 1);
     }
-  }
 
-  return currMostFrequent[0];
+    for (const key in charMap) {
+      let count = charMap[key];
+      if (typeof count !== "undefined") {
+        if (count > currMostFrequent[1]) {
+          currMostFrequent[0] = key;
+          currMostFrequent[1] = count;
+        }
+      }
+    }
+
+    return currMostFrequent[0];
+  }
+  return "Input not valid";
 };
 
 console.log(mostFrequentChar("bookeeper"));
