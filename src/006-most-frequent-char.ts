@@ -14,26 +14,28 @@
 const mostFrequentChar = (s: string): string => {
   if (s.length > 0) {
     const charMap: { [key: string]: number } = {};
-    let currMostFrequent: [string, number] = ["", 0];
+    let currMostFrequent = "";
+    let currHighestFrequency = 0;
 
     for (const char of s) {
       char in charMap ? (charMap[char] += 1) : (charMap[char] = 1);
     }
 
-    for (const key in charMap) {
-      let count = charMap[key];
-      if (typeof count !== "undefined") {
-        if (count > currMostFrequent[1]) {
-          currMostFrequent[0] = key;
-          currMostFrequent[1] = count;
+    for (const char in charMap) {
+      let charCount = charMap[char];
+      if (typeof charCount !== "undefined") {
+        if (charCount > currHighestFrequency) {
+          currMostFrequent = char;
+          currHighestFrequency = charCount;
         }
       }
     }
 
-    return currMostFrequent[0];
+    return currMostFrequent;
   }
   return "Input not valid";
 };
 
+// O(n) Time | O(n) Space
 console.log(mostFrequentChar("bookeeper"));
 console.log(mostFrequentChar("david"));
