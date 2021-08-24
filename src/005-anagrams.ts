@@ -65,15 +65,42 @@ const anagrams3 = (str1: string, str2: string): boolean => {
   return true;
 };
 
-// O(n) Time | O(n) Space
+const anagrams4 = (str1: string, str2: string): boolean => {
+  if (str1.length !== str2.length) return false;
+
+  let strMap: { [key: string]: number } = {};
+
+  for (const char of str1) {
+    char in strMap ? (strMap[char] += 1) : (strMap[char] = 1);
+  }
+
+  for (const char of str2) {
+    if (char in strMap) {
+      strMap[char] -= 1;
+    } else {
+      return false;
+    }
+  }
+
+  for (const key in strMap) {
+    if (strMap[key] !== 0) return false;
+  }
+
+  return true;
+};
+
+// O(n+m) Time | O(n+m) Space
 console.log(anagrams("restful", "fluster")); // true
 console.log(anagrams("cats", "tocs")); // false
 
-// O(n*log(n)) Time | O(n) Space
+// O(n*log(n)) Time | O(n+m) Space
 console.log(anagrams2("restful", "fluster")); // true
 console.log(anagrams2("cats", "tocs")); // false */
 
-// O(n) Time | O(n) Space
+// O(n+m) Time | O(n+m) Space
 console.log(anagrams3("restful", "fluster")); // true
 console.log(anagrams3("cats", "tocs")); // false
-console.log(anagrams3("paper", "reapa")); // -> false
+
+// O(n+m) Time | O(n) Space
+console.log(anagrams4("restful", "fluster")); // true
+console.log(anagrams4("cats", "tocs")); // false
