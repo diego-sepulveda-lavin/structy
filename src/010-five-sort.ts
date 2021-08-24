@@ -16,11 +16,11 @@ const fiveSort = (nums: number[]): number[] => {
   let rightPointer = nums.length - 1;
 
   while (leftPointer < rightPointer) {
-    if (nums[leftPointer] === 5 && nums[rightPointer] !== 5) {
+    if (nums[rightPointer] === 5) {
+      rightPointer--;
+    } else if (nums[leftPointer] === 5) {
       swap(nums, leftPointer, rightPointer);
       leftPointer++;
-      rightPointer--;
-    } else if (nums[leftPointer] === 5 && nums[rightPointer] === 5) {
       rightPointer--;
     } else {
       leftPointer++;
@@ -35,5 +35,6 @@ const swap = (array: number[], leftIdx: number, rightIdx: number) => {
   array[rightIdx] = temp;
 };
 
+// O(n) Time | O(1) Space
 console.log(fiveSort([12, 5, 1, 5, 12, 7])); // -> [12, 7, 1, 12, 5, 5];
 console.log(fiveSort([5, 2, 5, 6, 5, 1, 10, 2, 5, 5])); // -> [2, 2, 10, 6, 1, 5, 5, 5, 5, 5];
