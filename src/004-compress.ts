@@ -26,7 +26,7 @@ const compress = (s: string) => {
       p2++;
     } else {
       let count = p2 - p1; // rest of p2 - p1 indexes represents the number of chars
-      count === 1 ? output.push(s[p1]!) : output.push(count + s[p1]!);
+      count === 1 ? output.push(String(s[p1])) : output.push(String(count) + s[p1]);
       p1 = p2;
     }
   }
