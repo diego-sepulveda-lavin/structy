@@ -31,12 +31,11 @@ const pairSum2 = (numbers: number[], targetSum: number): number[] => {
     const currNumber = numbers[i];
 
     if (typeof currNumber !== "undefined") {
-      if (!(currNumber in visitedNumbers)) visitedNumbers[currNumber] = i;
-
       let compliment = targetSum - currNumber;
-      if (compliment in visitedNumbers && visitedNumbers[compliment] !== i) {
+      if (compliment in visitedNumbers) {
         return [visitedNumbers[compliment]!, i];
       }
+      visitedNumbers[currNumber] = i;
     }
   }
   return [];
