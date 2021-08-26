@@ -67,6 +67,12 @@ const linkedListFind = (head: Node | null, target: string | number): boolean => 
   return false;
 };
 
+const linkedListFind2 = (node: Node | null, target: string | number): boolean => {
+  if (node === null) return false;
+  if (node.value === target) return true;
+  return linkedListFind2(node.next, target);
+};
+
 // O(n) Time | O(1) Space
 // a -> b -> c -> d
 console.log(linkedListFind(a, "c")); // true
@@ -74,3 +80,7 @@ console.log(linkedListFind(a, "c")); // true
 // O(n) Time | O(1) Space
 // 42
 console.log(linkedListFind(node1, 100)); // false
+
+// O(n) Time | O(n) Space
+// a -> b -> c -> d
+console.log(linkedListFind2(a, "c")); // true
