@@ -34,7 +34,7 @@ export class Node {
     this._next = next;
   }
 
-  connect(nodeB: Node | null) {
+  connect(nodeB: Node) {
     this.next = nodeB;
   }
 }
