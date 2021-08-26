@@ -54,7 +54,6 @@ const sumList = (head: Node | null) => {
   let totalSum = 0;
   let current = head;
   while (current !== null) {
-    console.log(typeof current.value, current.value);
     totalSum += current.value;
     current = current.next;
   }
@@ -62,5 +61,13 @@ const sumList = (head: Node | null) => {
   return totalSum;
 };
 
+const sumList2 = (node: Node | null): number => {
+  if (node === null) return 0;
+  return node.value + sumList2(node.next);
+};
+
 // O(n) Time | O(1) Space
 console.log(sumList(a));
+
+// O(n) Time | O(n) Space
+console.log(sumList2(a));
