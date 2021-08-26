@@ -50,9 +50,9 @@ b.connect(c);
 c.connect(d);
 d.connect(e);
 
-const sumList = (head: Node | null) => {
+const sumList = (head: Node) => {
   let totalSum = 0;
-  let current = head;
+  let current: Node | null = head;
   while (current !== null) {
     totalSum += current.value;
     current = current.next;

@@ -57,8 +57,8 @@ c.connect(d);
 
 const node1 = new Node(42);
 
-const linkedListFind = (head: Node | null, target: string | number): boolean => {
-  let current = head;
+const linkedListFind = (head: Node, target: string | number): boolean => {
+  let current: Node | null = head;
   while (current !== null) {
     if (current.value === target) return true;
     current = current.next;

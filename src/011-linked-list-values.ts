@@ -64,9 +64,9 @@ a.connectNode(b);
 b.connectNode(c);
 c.connectNode(d);
 
-const linkedListValues = (head: Node | null) => {
+const linkedListValues = (head: Node) => {
   let values: string[] = [];
-  let current = head;
+  let current: Node | null = head;
 
   while (current !== null) {
     values.push(current.value);
