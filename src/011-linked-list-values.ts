@@ -30,28 +30,28 @@
 */
 
 export class Node {
-  private val: string;
-  private next: Node | null;
+  private _value: string;
+  private _next: Node | null;
 
-  constructor(val: string) {
-    this.val = val;
-    this.next = null;
+  constructor(value: string) {
+    this._value = value;
+    this._next = null;
   }
 
   connectNode(nodeB: Node) {
-    this.next = nodeB;
+    this._next = nodeB;
   }
 
-  getVal() {
-    return this.val;
+  get value() {
+    return this._value;
   }
 
-  setVal(val: string) {
-    this.val = val;
+  set value(value: string) {
+    this._value = value;
   }
 
-  getNext() {
-    return this.next;
+  get next() {
+    return this._next;
   }
 }
 
@@ -69,8 +69,8 @@ const linkedListValues = (head: Node | null) => {
   let current = head;
 
   while (current !== null) {
-    values.push(current.getVal());
-    current = current.getNext();
+    values.push(current.value);
+    current = current.next;
   }
 
   return values;
@@ -84,8 +84,8 @@ const linkedListValues2 = (head: Node | null) => {
 
 const fillValues = (head: Node | null, values: string[]) => {
   if (head === null) return;
-  values.push(head.getVal());
-  fillValues(head.getNext(), values);
+  values.push(head.value);
+  fillValues(head.next, values);
 };
 
 // O(n) Time | O(n) Space
