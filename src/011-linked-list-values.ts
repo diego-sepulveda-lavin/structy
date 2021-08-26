@@ -30,11 +30,28 @@
 */
 
 export class Node {
-  val: string;
-  next: Node | null;
+  private val: string;
+  private next: Node | null;
+
   constructor(val: string) {
     this.val = val;
     this.next = null;
+  }
+
+  connectNode(nodeB: Node) {
+    this.next = nodeB;
+  }
+
+  getVal() {
+    return this.val;
+  }
+
+  setVal(val: string) {
+    this.val = val;
+  }
+
+  getNext() {
+    return this.next;
   }
 }
 
@@ -43,20 +60,36 @@ const b = new Node("b");
 const c = new Node("c");
 const d = new Node("d");
 
-a.next = b;
-b.next = c;
-c.next = d;
+a.connectNode(b);
+b.connectNode(c);
+c.connectNode(d);
 
 const linkedListValues = (head: Node | null) => {
-  let output: string[] = [];
-  let currNode = head;
+  let values: string[] = [];
+  let current = head;
 
-  while (currNode !== null) {
-    output.push(currNode.val);
-    currNode = currNode.next;
+  while (current !== null) {
+    values.push(current.getVal());
+    current = current.getNext();
   }
 
-  return output;
+  return values;
 };
 
+const linkedListValues2 = (head: Node | null) => {
+  const values: string[] = [];
+  fillValues(head, values);
+  return values;
+};
+
+const fillValues = (head: Node | null, values: string[]) => {
+  if (head === null) return;
+  values.push(head.getVal());
+  fillValues(head.getNext(), values);
+};
+
+// O(n) Time | O(n) Space
 console.log(linkedListValues(a)); // -> [ 'a', 'b', 'c', 'd' ]
+
+// O(n) Time | O(n) Space
+console.log(linkedListValues2(a)); // -> [ 'a', 'b', 'c', 'd' ]
