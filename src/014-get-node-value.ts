@@ -59,10 +59,10 @@ const getNodeValue = (node: Node, index: number) => {
   return null;
 };
 
-const getNodeValue2 = (node: Node | null, searchedIdx: number, currIdx: number = 0): string | null => {
+const getNodeValue2 = (node: Node | null, index: number): string | null => {
   if (node === null) return null;
-  if (searchedIdx === currIdx) return node.value;
-  return getNodeValue2(node.next, searchedIdx, currIdx + 1);
+  if (index === 0) return node.value;
+  return getNodeValue2(node.next, index - 1);
 };
 
 // O(n) Time | O(1) Space
