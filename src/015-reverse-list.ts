@@ -64,6 +64,17 @@ const reverseList = (head: Node) => {
   return prev;
 };
 
+const reverseList2 = (head: Node | null, prev: Node | null = null): Node | null => {
+  if (head === null) return prev;
+  const next = head.next;
+  head.next = prev;
+  return reverseList2(next, head);
+};
+
 // O(n) Time | O(1) Space
 // a -> b -> c -> d -> e -> f
 console.log(reverseList(a)); // f -> e -> d -> c -> b -> a
+
+// O(n) Time | O(n) Space
+// a -> b -> c -> d -> e -> f
+console.log(reverseList2(a)); // f -> e -> d -> c -> b -> a
