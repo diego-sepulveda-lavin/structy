@@ -48,15 +48,29 @@ export class Node {
   connect(node: Node) {
     this.next = node;
   }
+
+  linkedListValues = () => {
+    let values: (string | number)[] = [];
+    let current: Node | null = this;
+
+    while (current !== null) {
+      values.push(current.value);
+      current = current.next;
+    }
+
+    return values;
+  };
 }
 
 const a = new Node("a");
 const b = new Node("b");
 const c = new Node("c");
+const d = new Node("d");
 
 a.connect(b);
 b.connect(c);
-// a -> b -> c
+c.connect(d);
+// a -> b -> c -> d
 
 const x = new Node("x");
 const y = new Node("y");
@@ -73,15 +87,17 @@ const zipperLists = (headA: Node, headB: Node) => {
   while (currentA !== null && currentB !== null) {
     const nextA: Node | null = currentA.next;
     const nextB: Node | null = currentB.next;
-    currentA.next = currentB;
-    currentB !== null ? (currentA.next = currentB) : (currentA.next = currentA.next);
+    currentB !== null && (currentA.next = currentB);
     currentA = nextA;
-    currentA !== null ? (currentB.next = currentA) : (currentB.next = currentB.next);
+    currentA !== null && (currentB.next = currentA);
     currentB = nextB;
   }
 
+  console.log(headA.linkedListValues());
   return headA;
 };
 
-// a -> x -> b -> y -> c -> z
-console.log(zipperLists(a, x));
+// n = length of list 1, m = length of list 2
+// O (min(n,m)) Time | O (1) Time
+// a -> x -> b -> y -> c -> z -> d
+zipperLists(a, x);
