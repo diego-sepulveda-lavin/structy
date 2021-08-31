@@ -74,10 +74,13 @@ const zipperLists = (headA: Node, headB: Node) => {
     const nextA: Node | null = currentA.next;
     const nextB: Node | null = currentB.next;
     currentA.next = currentB;
+    currentB !== null ? (currentA.next = currentB) : (currentA.next = currentA.next);
     currentA = nextA;
-    currentB.next = currentA;
+    currentA !== null ? (currentB.next = currentA) : (currentB.next = currentB.next);
     currentB = nextB;
   }
+
+  return headA;
 };
 
 // a -> x -> b -> y -> c -> z
