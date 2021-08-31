@@ -49,7 +49,7 @@ export class Node {
     this.next = node;
   }
 
-  linkedListValues = () => {
+  printValues = () => {
     let values: (string | number)[] = [];
     let current: Node | null = this;
 
@@ -57,7 +57,7 @@ export class Node {
       values.push(current.value);
       current = current.next;
     }
-
+    console.log(values);
     return values;
   };
 }
@@ -93,7 +93,7 @@ const zipperLists = (headA: Node, headB: Node) => {
     currentB = nextB;
   }
 
-  console.log(headA.linkedListValues());
+  headA.printValues();
   return headA;
 };
 
