@@ -92,16 +92,46 @@ const mergeLists = (headA: Node, headB: Node) => {
         currentNodeA.next = currentNodeB;
       }
       currentNodeA = nextNodeA;
-    } else if(currentNodeA.value > currentNodeB.value) {
+    } else if (currentNodeB.value < currentNodeA.value) {
       if (nextNodeB === null || currentNodeA.value <= nextNodeB.value) {
         currentNodeB.next = currentNodeA;
       }
       currentNodeB = nextNodeB;
-    } 
+    }
   }
-  
+
   head.printValues();
   return head;
 };
 
-mergeLists(a, q);
+const mergeLists2 = (headA: Node, headB: Node) => {
+  const dummyHead = new Node(0);
+  let tail = dummyHead;
+
+  let currentNodeA: Node | null = headA;
+  let currentNodeB: Node | null = headB;
+
+  while (currentNodeA !== null && currentNodeB !== null) {
+    if (currentNodeA.value < currentNodeB.value) {
+      tail.next = currentNodeA;
+      currentNodeA = currentNodeA.next;
+    } else {
+      tail.next = currentNodeB;
+      currentNodeB = currentNodeB.next;
+    }
+    tail = tail.next;
+  }
+
+  if (currentNodeA !== null) tail.next = currentNodeA;
+  if (currentNodeB !== null) tail.next = currentNodeB;
+
+  return dummyHead.next;
+};
+
+// n = length of list 1, m = length of list 2
+// O (min(n,m)) Time | O (1) Time
+//mergeLists(a, q);
+
+// n = length of list 1, m = length of list 2
+// O (min(n,m)) Time | O (1) Time
+mergeLists2(a, q);
