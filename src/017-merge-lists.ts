@@ -69,38 +69,39 @@ c.connect(d);
 d.connect(e);
 e.connect(f);
 
-const q = new Node(6);
+const q = new Node(1);
 const r = new Node(8);
 const s = new Node(9);
-const t = new Node(25);
+const t = new Node(10);
 
 q.connect(r);
 r.connect(s);
 s.connect(t);
 
 const mergeLists = (headA: Node, headB: Node) => {
-  let currentA: Node | null = headA;
-  let currentB: Node | null = headB;
+  let currentNodeA: Node | null = headA;
+  let currentNodeB: Node | null = headB;
+  let head = currentNodeA.value <= currentNodeB.value ? currentNodeA : currentNodeB;
 
-  while (currentA !== null && currentB !== null) {
-    const nextA: Node | null = currentA.next;
-    const nextB: Node | null = currentB.next;
+  while (currentNodeA !== null && currentNodeB !== null) {
+    const nextNodeA: Node | null = currentNodeA.next;
+    const nextNodeB: Node | null = currentNodeB.next;
 
-    if (nextA !== null && currentA.value <= currentB.value && currentB.value < nextA.value) {
-      currentB !== null && (currentA.next = currentB);
-      currentA = nextA;
-    } else if (currentA.value <= currentB.value) {
-      currentA = nextA;
-    } else if (nextB !== null && currentB.value < currentA.value && currentA.value < nextB.value) {
-      currentA !== null && (currentB.next = currentA);
-      currentB = nextB;
-    } else if (currentB.value < currentA.value) {
-      currentB = nextB;
-    }
+    if (currentNodeA.value <= currentNodeB.value) {
+      if (nextNodeA === null || currentNodeB.value <= nextNodeA.value) {
+        currentNodeA.next = currentNodeB;
+      }
+      currentNodeA = nextNodeA;
+    } else if(currentNodeA.value > currentNodeB.value) {
+      if (nextNodeB === null || currentNodeA.value <= nextNodeB.value) {
+        currentNodeB.next = currentNodeA;
+      }
+      currentNodeB = nextNodeB;
+    } 
   }
-
-  headA.printValues();
-  return headA;
+  
+  head.printValues();
+  return head;
 };
 
 mergeLists(a, q);
