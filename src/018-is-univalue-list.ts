@@ -53,10 +53,21 @@ export class Node {
 
 const a = new Node(7);
 const b = new Node(7);
-const c = new Node(7);
+const c = new Node(4);
 
 a.connect(b);
 b.connect(c);
 
-const isUnivalueList = (head: Node) => {};
-isUnivalueList(a);
+const isUnivalueList = (head: Node) => {
+  let current: Node | null = head;
+  let headValue = head.value;
+
+  while (current !== null) {
+    if (current.value !== headValue) return false;
+    current = current.next;
+  }
+  return true;
+};
+
+// O(n) Time || O(1) Space
+console.log(isUnivalueList(a));
