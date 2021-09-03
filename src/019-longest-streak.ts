@@ -53,16 +53,16 @@ export class Node {
 
 const a = new Node(5);
 const b = new Node(5);
-const c = new Node(5);
+const c = new Node(7);
 const d = new Node(7);
-const e = new Node(5);
-const f = new Node(5);
+const e = new Node(7);
+const f = new Node(6);
 
 a.connect(b);
 b.connect(c);
 c.connect(d);
-/* d.connect(e);
-e.connect(f); */
+d.connect(e);
+e.connect(f);
 
 const longestStreak = (head: Node) => {
   if (head === null) return 0;
@@ -78,8 +78,6 @@ const longestStreak = (head: Node) => {
     if (current.value === currStreakValue) {
       currStreak++;
     } else {
-/*       maxStreakValue = currStreakValue;
-      maxStreak = currStreak; */
       currStreakValue = current.value;
       currStreak = 1;
     }
