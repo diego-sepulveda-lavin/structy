@@ -71,19 +71,36 @@ const insertNode = (head: Node, value: string, index: number) => {
   let currIdx = 0;
   let current: Node | null = head;
   let prev: Node | null = null;
+  const newNode = new Node(value);
 
   while (current !== null) {
+    if (index === 0) {
+      newNode.next = current;
+      head = newNode;
+      return head;
+    }
     if (currIdx == index && prev instanceof Node) {
-      const newNode = new Node(value);
       prev.next = newNode;
       newNode.next = current;
-      break;
+      return head;
     }
     currIdx++;
     prev = current;
     current = current.next;
   }
+
+  if (currIdx === index && prev instanceof Node) {
+    prev.next = newNode;
+    newNode.next = null;
+    return head;
+  }
+
   return head;
 };
 
+// O(n) Time | O(1) Space
+// a -> b -> c -> d
+//a -> b -> x -> c -> d
 console.log(insertNode(a, "x", 2));
+
+
