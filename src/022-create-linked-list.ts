@@ -63,6 +63,23 @@ const createLinkedList = (arr: (string | number)[]) => {
   return nodes[0];
 };
 
+const createLinkedList2 = (arr: (string | number)[]) => {
+  const dummyHead = new Node("");
+  let current = dummyHead;
+
+  for (const element of arr) {
+    const newNode = new Node(element);
+    current.next = newNode;
+    current = newNode;
+  }
+
+  return dummyHead.next;
+};
+
 // n = length of values
 // Time: O(n) | Space: O(n)
-console.log(createLinkedList(["h", "e", "y"]));
+//console.log(createLinkedList(["h", "e", "y"]));
+
+// n = length of values
+// Time: O(n) | Space: O(n)
+console.log(createLinkedList2(["h", "e", "y"]));
