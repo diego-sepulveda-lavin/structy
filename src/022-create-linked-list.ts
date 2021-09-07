@@ -85,7 +85,7 @@ const createLinkedList3 = (arr: (string | number)[], i: number = 0) => {
 
 // n = length of values
 // Time: O(n) | Space: O(n)
-//console.log(createLinkedList(["h", "e", "y"]));
+console.log(createLinkedList(["h", "e", "y"]));
 
 // n = length of values
 // Time: O(n) | Space: O(n)
