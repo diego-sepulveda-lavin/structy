@@ -74,7 +74,7 @@ a3.connect(a4);
 // 9 -> 9 -> 9 -> 9
 
 const b1 = new Node(9);
-const b2 = new Node(9);
+const b2 = new Node(7);
 b1.connect(b2);
 // 9 -> 7
 
@@ -85,39 +85,19 @@ const addLists = (head1: Node, head2: Node) => {
   let tail = dummyHead;
   let carry: number = 0;
 
-  while (current1 !== null || current2 !== null) {
-    let value1: number = 0;
-    let value2: number = 0;
+  while (current1 !== null || current2 !== null || carry !== 0) {
+    let value1: number = current1 !== null ? current1.value : 0;
+    let value2: number = current2 !== null ? current2.value : 0;
 
-    if (current1) {
-      value1 = current1.value;
-      current1 = current1.next;
-    }
-    if (current2) {
-      value2 = current2.value;
-      current2 = current2.next;
-    }
+    current1 !== null && (current1 = current1.next);
+    current2 !== null && (current2 = current2.next);
 
     let sum = value1 + value2 + carry;
+    let ones = sum % 10;
+    let tens = Math.floor(sum / 10);
+    carry = sum >= 10 ? tens : 0;
 
-    if (sum >= 10) {
-      let ones = sum % 10;
-      let tens = Math.floor(sum / 10);
-
-      carry = tens;
-      let newNode = new Node(ones);
-
-      tail.next = newNode;
-      tail = newNode;
-    } else {
-      carry = 0;
-      let newNode = new Node(sum);
-      tail.next = newNode;
-      tail = newNode;
-    }
-  }
-  if (carry > 0) {
-    let newNode = new Node(carry);
+    let newNode: Node = new Node(ones);
     tail.next = newNode;
     tail = newNode;
   }
@@ -132,3 +112,5 @@ const addLists = (head1: Node, head2: Node) => {
 
 // 5 -> 7 -> 9
 console.log(addLists(a1, b1));
+let result = addLists(a1, b1);
+result?.printValues();
