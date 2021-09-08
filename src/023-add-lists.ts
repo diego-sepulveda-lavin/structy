@@ -112,5 +112,4 @@ const addLists = (head1: Node, head2: Node) => {
 
 // 5 -> 7 -> 9
 console.log(addLists(a1, b1));
-let result = addLists(a1, b1);
-result?.printValues();
+
