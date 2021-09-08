@@ -56,6 +56,18 @@ const depthFirstValues = (root: Node) => {
   return treeValues;
 };
 
+const depthFirstValues2 = (node: Node | null, arr: (string | number)[] = []) => {
+  if (node === null) return [];
+  arr.push(node.val);
+  depthFirstValues2(node.left, arr);
+  depthFirstValues2(node.right, arr);
+  return arr;
+};
+
 // n = number of nodes
 // O(n) Time | O(n) Space
 console.log(depthFirstValues(a));
+
+// n = number of nodes
+// O(n) Time | O(n) Space
+console.log(depthFirstValues2(a));
