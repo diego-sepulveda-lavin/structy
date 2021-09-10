@@ -75,12 +75,24 @@ const treeMinValue2 = (root: Node) => {
   return minVal;
 };
 
+const treeMinValue3 = (root: Node | null): number => {
+  if (root === null) return Infinity;
+  const smallestLeft = treeMinValue3(root.left);
+  const smallestRight = treeMinValue3(root.right);
+  return Math.min(root.val, smallestLeft, smallestRight);
+};
+
 // Iterative Breadth First
 // n = number of nodes
 // O(n) Time | O(n) Space
-console.log(treeMinValue(a));
+//console.log(treeMinValue(a));
 
 // Iterative Depth First
 // n = number of nodes
 // O(n) Time | O(n) Space
-console.log(treeMinValue2(a));
+//console.log(treeMinValue2(a));
+
+// Recursive Depth First
+// n = number of nodes
+// O(n) Time | O(n) Space
+console.log(treeMinValue3(a));
