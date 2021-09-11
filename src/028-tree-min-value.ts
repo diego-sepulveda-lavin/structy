@@ -64,7 +64,7 @@ const treeMinValue2 = (root: Node) => {
   let minVal = Infinity;
 
   while (stack.length > 0) {
-    const current = stack.shift();
+    const current = stack.pop();
     if (current) {
       if (current.val < minVal) minVal = current.val;
       current.right !== null && stack.push(current.right);
@@ -82,15 +82,21 @@ const treeMinValue3 = (root: Node | null): number => {
   return Math.min(root.val, smallestLeft, smallestRight);
 };
 
+
 // Iterative Breadth First
 // n = number of nodes
 // O(n) Time | O(n) Space
-//console.log(treeMinValue(a));
+/* 
+  Note: this solution should really be considered O(n^2) runtime 
+  because the JavaScript shift() methods runs in O(n). 
+  JavaScript does not have a native queue data structure that is maximally efficient. 
+*/
+console.log(treeMinValue(a));
 
 // Iterative Depth First
 // n = number of nodes
 // O(n) Time | O(n) Space
-//console.log(treeMinValue2(a));
+console.log(treeMinValue2(a));
 
 // Recursive Depth First
 // n = number of nodes
