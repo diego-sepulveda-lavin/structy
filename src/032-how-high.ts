@@ -45,15 +45,11 @@ b.left = d;
 b.right = e;
 c.right = f;
 
-const howHigh = (node: Node | null): number => {
-  const result = howHighHelper(node);
-  return result - 1;
-};
 
-const howHighHelper = (node: Node | null): number => {
-  if (node === null) return 0;
-  const leftHigh = howHighHelper(node.left);
-  const rightHigh = howHighHelper(node.right);
+const howHigh = (node: Node | null): number => {
+  if (node === null) return - 1;
+  const leftHigh = howHigh(node.left);
+  const rightHigh = howHigh(node.right);
   return Math.max(leftHigh, rightHigh) + 1;
 };
 
