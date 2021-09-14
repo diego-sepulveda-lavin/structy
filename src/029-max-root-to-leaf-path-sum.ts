@@ -56,4 +56,7 @@ const maxPathSum = (root: Node | null): number => {
   return leftSum >= rightSum ? leftSum : rightSum;
 };
 
+// Recursive Depth First
+// n = number of nodes
+// O(n) Time | O(n) Space
 console.log(maxPathSum(a));
