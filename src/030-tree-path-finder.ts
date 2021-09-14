@@ -48,11 +48,43 @@ const pathFinder = (root: Node | null, target: number | string): null | (string 
   if (root === null) return null;
   if (root.val === target) return [root.val];
 
-  let leftBranch = pathFinder(root.left, target);
-  let rightBranch = pathFinder(root.right, target);
+  let leftPath = pathFinder(root.left, target);
+  if (leftPath !== null) return [root.val, ...leftPath];
+  let rightPath = pathFinder(root.right, target);
+  if (rightPath !== null) return [root.val, ...rightPath];
 
-  if (leftBranch === null && rightBranch === null) return null;
-  if (leftBranch !== null) return [root.val, ...leftBranch];
-  if (rightBranch !== null) return [root.val, ...rightBranch];
+  return null;
 };
+
+const pathFinder2 = (root: Node, target: number | string) => {
+  const result = pathFinderHelper(root, target);
+  if (result === null) return null;
+  return result.reverse();
+};
+
+const pathFinderHelper = (root: Node | null, target: number | string): null | (string | number)[] => {
+  if (root === null) return null;
+  if (root.val === target) return [root.val];
+
+  const leftPath = pathFinderHelper(root.left, target);
+  if (leftPath !== null) {
+    leftPath.push(root.val);
+    return leftPath;
+  }
+
+  const rightPath = pathFinderHelper(root.right, target);
+  if (rightPath !== null) {
+    rightPath.push(root.val);
+    return rightPath;
+  }
+
+  return null;
+};
+
+// n = number of nodes
+// O(n^2) Time due to spread operator | O(n) Space
 console.log(pathFinder(a, "e"));
+
+// n = number of nodes
+// O(n) Time | O(n) Space
+console.log(pathFinder2(a, "e"));
