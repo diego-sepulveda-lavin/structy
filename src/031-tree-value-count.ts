@@ -71,6 +71,14 @@ const treeValueCount2 = (root: Node, target: number | string) => {
   return targetCounter;
 };
 
+const treeValueCount3 = (root: Node | null, target: number | string): number => {
+  if (root === null) return 0;
+  const match = root.val === target ? 1 : 0;
+  const leftPathCounter = treeValueCount3(root.left, target);
+  const rightPathCounter = treeValueCount3(root.right, target);
+  return leftPathCounter + rightPathCounter + match;
+};
+
 // Iterative Breadth First
 // n = number of nodes
 // O(n) Time | O(n) Space
@@ -85,3 +93,8 @@ console.log(treeValueCount(a, 6));
 // n = number of nodes
 // O(n) Time | O(n) Space
 console.log(treeValueCount2(a, 6));
+
+// Recursive Depth First
+// n = number of nodes
+// O(n) Time | O(n) Space
+console.log(treeValueCount3(a, 6));
