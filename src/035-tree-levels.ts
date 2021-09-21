@@ -89,12 +89,36 @@ const treeLevels2 = (root: Node): string[][] => {
   return levels;
 };
 
+const treeLevels3 = (root: Node) => {
+  const levels: string[][] = [];
+  _treeLevels(root, levels, 0);
+  return levels;
+};
+
+const _treeLevels = (root: Node | null, levels: string[][], levelNum: number) => {
+  if (root === null) return;
+
+  if (levels.length === levelNum) {
+    levels[levelNum] = [root.val];
+  } else {
+    levels[levelNum].push(root.val);
+  }
+
+  _treeLevels(root.left, levels, levelNum + 1);
+  _treeLevels(root.right, levels, levelNum + 1);
+};
+
 // Iterative Depth First
-//n = number of nodes
+// n = number of nodes
 // Time: O(n) | Space: O(n)
 console.log(treeLevels(a));
 
-// Iterative Bread First
-//n = number of nodes
+// Iterative Breadth First
+// n = number of nodes
 // Time: O(n) | Space: O(n)
 console.log(treeLevels2(a));
+
+// Recursive Depth First
+// n = number of nodes
+// Time: O(n) | Space: O(n)
+console.log(treeLevels3(a));
