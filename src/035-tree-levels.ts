@@ -54,19 +54,47 @@ const treeLevels = (root: Node): string[][] => {
   while (stack.length > 0) {
     const { node, level } = stack.pop()!;
 
-    if (levels[level] !== undefined) {
-      levels[level] = [node.val, ...levels[level]];
+    if (levels.length == level) {
+      levels.push([node.val]);
     } else {
-      levels[level] = [node.val];
+      levels[level].push(node.val);
     }
 
-    node.left !== null && stack.push({ node: node.left, level: level + 1 });
     node.right !== null && stack.push({ node: node.right, level: level + 1 });
+    node.left !== null && stack.push({ node: node.left, level: level + 1 });
   }
 
   return levels;
 };
 
+const treeLevels2 = (root: Node): string[][] => {
+  if (root === null) return [];
+  const queue = [{ node: root, level: 0 }];
+
+  let levels: string[][] = [];
+
+  while (queue.length > 0) {
+    const { node, level } = queue.shift()!;
+
+    if (levels.length == level) {
+      levels.push([node.val]);
+    } else {
+      levels[level].push(node.val);
+    }
+
+    node.left !== null && queue.push({ node: node.left, level: level + 1 });
+    node.right !== null && queue.push({ node: node.right, level: level + 1 });
+  }
+
+  return levels;
+};
+
+// Iterative Depth First
 //n = number of nodes
 // Time: O(n) | Space: O(n)
 console.log(treeLevels(a));
+
+// Iterative Bread First
+//n = number of nodes
+// Time: O(n) | Space: O(n)
+console.log(treeLevels2(a));
